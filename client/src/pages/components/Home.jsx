@@ -40,6 +40,7 @@ const Home = () => {
         </p>
       </div>
 
+      {/* Browse Categories Section */}
       <div className="mb-12">
         <h2 className="text-2xl font-semibold text-blue-500 mb-6">
           Browse Our Categories
@@ -49,7 +50,7 @@ const Home = () => {
             id="category-scroll"
             className="flex overflow-x-auto space-x-4 py-2 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200"
           >
-            {categories.map((category, index) => (
+            {Array.isArray(categories) && categories.map((category, index) => (
               <div
                 key={index}
                 className="border p-4 rounded-lg text-center flex-shrink-0 hover:bg-blue-100 transition-transform duration-300 transform hover:scale-105"
@@ -69,7 +70,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Subcategories Section */}
+      {/* Browse Vehicle List Section */}
       <div className="mb-12">
         <h2 className="text-2xl font-semibold text-blue-500 mb-6">
           Vehicle List
@@ -79,7 +80,7 @@ const Home = () => {
             id="subcategory-scroll"
             className="flex overflow-x-auto space-x-4 py-2 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200"
           >
-            {vehicles.map((brand, index) => (
+            {Array.isArray(vehicles) && vehicles.map((brand, index) => (
               <div
                 key={index}
                 className="border p-4 rounded-lg text-center flex-shrink-0 hover:bg-blue-100 transition-transform duration-300 transform hover:scale-105"
@@ -110,7 +111,7 @@ const Home = () => {
           <p className="text-red-500 text-center">Error: {error}</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
+            {Array.isArray(products) && products.map((product) => (
               <div
                 key={product._id}
                 className="border p-4 rounded-lg hover:bg-blue-100 transition-transform duration-300 transform hover:scale-105"
