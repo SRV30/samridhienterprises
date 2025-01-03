@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  @apply bg-gray-200 text-black;
+}
+
+@media print {
+
+  /* Hide all non-order content during printing */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Make only the container content visible */
+  .order-content,
+  .order-content * {
+    visibility: visible;
+  }
+
+  /* Ensure the content is well-structured for printing */
+  .order-content {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide the print button in the print view */
+  .print-btn {
+    display: none;
+  }
+
+  /* Additional print-specific styling adjustments */
+  .bg-white {
+    background-color: white !important;
+  }
+
+  .rounded-lg {
+    border-radius: 0 !important;
+  }
+
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+
+  .border-gray-200 {
+    border-color: #ddd !important;
+  }
+
+  .text-blue-600 {
+    color: black !important;
+  }
+
+  .text-gray-800 {
+    color: #333 !important;
+  }
+
+  .text-gray-600 {
+    color: #666 !important;
+  }
+
+  .font-semibold {
+    font-weight: bold !important;
+  }
+
+  /* Adjust spacing for printing */
+  .space-y-4 {
+    margin-bottom: 16px !important;
+  }
+
+  .list-disc {
+    list-style-type: disc !important;
+  }
+
+  .ml-6 {
+    margin-left: 24px !important;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
