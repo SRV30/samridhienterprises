@@ -43,7 +43,6 @@ function App() {
       <ToastContainer position="top-center" />
       <Header />
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products" element={<ProductsList />} />
@@ -54,7 +53,6 @@ function App() {
         <Route path="/contact" element={<GetInTouch />} />
         <Route path="/about-us" element={<AboutUsPage />} />
 
-        {/* Protected Routes */}
         <Route
           path="/profile"
           element={
@@ -115,8 +113,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        {/* Admin Routes */}
+        
         {isAuthenticated && user.role === "admin" && (
           <>
             <Route
