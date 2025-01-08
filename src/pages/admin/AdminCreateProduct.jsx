@@ -4,6 +4,7 @@ import { createProduct } from "@/store/products/productsSlice";
 import { categories, vehicles } from "@/pages/extra/Data";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import MetaData from "../extra/MetaData";
 
 const NewProduct = () => {
   const [images, setImages] = useState([]);
@@ -21,7 +22,6 @@ const NewProduct = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Check if all fields are filled to enable the submit button
     const isFormValid =
       productData.name &&
       productData.price &&
@@ -29,7 +29,7 @@ const NewProduct = () => {
       productData.category &&
       productData.brand &&
       productData.Stock &&
-      images.length > 0; // Ensure images are uploaded
+      images.length > 0;
 
     setIsFormValid(isFormValid);
   }, [productData, images]);
@@ -43,8 +43,8 @@ const NewProduct = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setImages([]); // Clear previous images
-    setImagesPreview([]); // Clear previous image previews
+    setImages([]);
+    setImagesPreview([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -96,6 +96,7 @@ const NewProduct = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-xl mt-5 mb-5">
+      <MetaData title="Create New Product" />
       <Link to="/admin/dashboard">
         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-6">
           Back to Dashboard

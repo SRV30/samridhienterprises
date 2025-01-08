@@ -1,7 +1,6 @@
 import axiosInstance from "@/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Fetch all orders
 export const fetchAllOrders = createAsyncThunk(
   "adminOrders/fetchAllOrders",
   async (_, { rejectWithValue }) => {
@@ -18,7 +17,6 @@ export const fetchAllOrders = createAsyncThunk(
   }
 );
 
-// Update order status
 export const updateOrderStatus = createAsyncThunk(
   "adminOrders/updateOrderStatus",
   async ({ orderId, status }, { rejectWithValue }) => {
@@ -37,7 +35,6 @@ export const updateOrderStatus = createAsyncThunk(
   }
 );
 
-// Delete order
 export const deleteOrder = createAsyncThunk(
   "adminOrders/deleteOrder",
   async (orderId, { rejectWithValue }) => {
@@ -54,7 +51,6 @@ export const deleteOrder = createAsyncThunk(
   }
 );
 
-// Bulk update orders
 export const bulkUpdateOrders = createAsyncThunk(
   "adminOrders/bulkUpdateOrders",
   async ({ orderIds, status }, { rejectWithValue }) => {
@@ -73,7 +69,6 @@ export const bulkUpdateOrders = createAsyncThunk(
   }
 );
 
-// Admin Order Slice
 const adminOrderSlice = createSlice({
   name: "adminOrders",
   initialState: {
@@ -88,7 +83,6 @@ const adminOrderSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Fetch all orders
     builder
       .addCase(fetchAllOrders.pending, (state) => {
         state.loading = true;
@@ -103,7 +97,7 @@ const adminOrderSlice = createSlice({
         state.error = action.payload;
       });
 
-    // Update order status
+
     builder
       .addCase(updateOrderStatus.pending, (state) => {
         state.loading = true;
@@ -121,7 +115,7 @@ const adminOrderSlice = createSlice({
         state.error = action.payload;
       });
 
-    // Delete order
+
     builder
       .addCase(deleteOrder.pending, (state) => {
         state.loading = true;
@@ -137,7 +131,6 @@ const adminOrderSlice = createSlice({
         state.error = action.payload;
       });
 
-    // Bulk update orders
     builder
       .addCase(bulkUpdateOrders.pending, (state) => {
         state.loading = true;

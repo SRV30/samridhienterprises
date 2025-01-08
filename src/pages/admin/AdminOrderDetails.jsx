@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { updateOrderStatus } from "@/store/orders/adminOrderSlice";
 import { CircularProgress, Button, Typography } from "@mui/material";
 import { fetchSingleOrder } from "@/store/orders/singleOrderSlice";
+import MetaData from "../extra/MetaData";
 
 const AdminOrderDetails = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const AdminOrderDetails = () => {
   useEffect(() => {
     if (isUpdated) {
       toast.success("Order status updated successfully!");
-      dispatch(fetchSingleOrder(orderId)); // Refresh order details
+      dispatch(fetchSingleOrder(orderId));
     }
     if (updateError) {
       toast.error(updateError);
@@ -35,19 +36,21 @@ const AdminOrderDetails = () => {
     dispatch(updateOrderStatus({ orderId, status }));
   };
 
-  // Print the order details
   const handlePrint = () => {
     window.print();
   };
 
   return (
     <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <MetaData title="Order Details" />
       {loading ? (
         <div className="flex justify-center items-center">
           <CircularProgress />
         </div>
       ) : error ? (
-        <div className="text-red-500 text-lg text-center">{error}</div>
+        <div className="text-red-500 text-lg text-center">
+          {toast.error(error)}
+        </div>
       ) : !order ? (
         <div className="text-gray-600 text-lg text-center">No order found.</div>
       ) : (
@@ -65,7 +68,6 @@ const AdminOrderDetails = () => {
               Order ID: {order._id}
             </Typography>
 
-            {/* Order Status */}
             <Typography variant="h5" className="text-gray-800 mb-4">
               Order Status:{" "}
               <span
@@ -190,7 +192,6 @@ const AdminOrderDetails = () => {
               </ul>
             </div>
 
-            {/* Total Price */}
             <Typography
               variant="h6"
               className="text-gray-800 font-semibold mb-6"
@@ -198,7 +199,6 @@ const AdminOrderDetails = () => {
               Total Price: ₹{order.totalPrice}
             </Typography>
 
-            {/* Print Button */}
             <div className="mt-6 text-center">
               <Button
                 variant="contained"

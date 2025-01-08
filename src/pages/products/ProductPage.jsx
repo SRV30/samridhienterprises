@@ -1,14 +1,22 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "@/store/products/productsSlice";
-// import { addToCart, addToWishlist } from "@/store/cart/cartSlice"; // Example cart actions
 import { gsap } from "gsap";
 import { categories, vehicles } from "@/pages/extra/Data";
+import MetaData from "../extra/MetaData";
+import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const { products = [], loading, error, productsCount = 0, filteredProductsCount = 0 } =
-    useSelector((state) => state.products);  // Default empty array for products and 0 for counts
+  const {
+    products = [],
+    loading,
+    error,
+    productsCount = 0,
+    filteredProductsCount = 0,
+  } = useSelector((state) => state.products);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [keyword, setKeyword] = useState("");
@@ -47,6 +55,7 @@ const ProductList = () => {
 
   useEffect(() => {
     handleSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch]);
 
   useEffect(() => {
@@ -77,19 +86,20 @@ const ProductList = () => {
 
   if (loading)
     return (
-      <div className="text-center text-xl font-semibold text-blue-500">
-        Loading...
+      <div className="flex justify-center items-center">
+        <CircularProgress />
       </div>
     );
   if (error)
     return (
       <div className="text-center text-xl font-semibold text-red-500">
-        Error: {error}
+        {toast.error(error)}
       </div>
     );
 
   return (
     <div className="product-card container mx-auto p-8 bg-gray-50 rounded-lg shadow-xl">
+      <MetaData title="Product List | Samridhi Enterprises" />
       <h2 className="text-3xl font-bold mb-6 text-center text-blue-500">
         Product List
       </h2>
@@ -205,7 +215,9 @@ const ProductList = () => {
                 key={product._id}
               >
                 <img
-                  src={product.images[0]?.url || '/path/to/placeholder-image.jpg'}
+                  src={
+                    product.images[0]?.url || "/path/to/placeholder-image.jpg"
+                  }
                   alt={product.name}
                   className="w-full h-56 object-cover rounded-lg mb-6"
                 />
@@ -224,18 +236,6 @@ const ProductList = () => {
                 <p className="text-lg font-bold text-blue-600 mt-4">
                   ₹{product.price}
                 </p>
-                <button
-                  className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                  onClick={() => dispatch(addToCart(product))}
-                >
-                  Add to Cart
-                </button>
-                <button
-                  className="mt-4 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 ml-2"
-                  onClick={() => dispatch(addToWishlist(product))}
-                >
-                  Add to Wishlist
-                </button>
               </div>
             ))}
           </div>

@@ -14,6 +14,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdminData } from "@/store/extra/adminDataSlice";
 import { Link } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
+import MetaData from "../extra/MetaData";
 
 ChartJS.register(
   Title,
@@ -78,15 +81,20 @@ const AdminData = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <div className="text-red-500">{toast.error(error)}</div>;
   }
 
   return (
     <div className="min-h-screen p-6">
+    <MetaData title="Admin Data" />
       <Link to="/admin/dashboard">
         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-6">
           Back to Dashboard

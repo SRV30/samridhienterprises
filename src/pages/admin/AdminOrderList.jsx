@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import {
   fetchAllOrders,
@@ -10,6 +10,7 @@ import {
 import { toast } from "react-toastify";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+import MetaData from "../extra/MetaData";
 
 const AdminOrderList = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const AdminOrderList = () => {
 
   return (
     <div className="container mx-auto py-12 px-4">
+      <MetaData title="Orders List" />
       <Typography
         variant="h4"
         className="text-4xl font-bold text-center text-blue-600 mb-12"
@@ -45,11 +47,13 @@ const AdminOrderList = () => {
       </Typography>
 
       {loading ? (
-        <div className="text-blue-500 text-xl text-center animate-pulse">
-          Loading...
+        <div className="flex justify-center items-center">
+          <CircularProgress />
         </div>
       ) : error ? (
-        <div className="text-red-500 text-lg text-center">{error}</div>
+        <div className="text-red-500 text-lg text-center">
+          {toast.error(error)}
+        </div>
       ) : myOrders.length === 0 ? (
         <div className="text-gray-600 text-lg text-center">
           You have no orders yet.

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMyOrders } from "@/store/orders/orderSlice";
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import MetaData from "../extra/MetaData";
 
 const MyOrders = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const MyOrders = () => {
 
   return (
     <div className="container mx-auto py-12 px-4">
+      <MetaData title="My Orders" />
       <Typography
         variant="h4"
         className="text-3xl font-bold text-center text-blue-500 mb-8"
@@ -26,8 +28,8 @@ const MyOrders = () => {
       </Typography>
 
       {loading ? (
-        <div className="text-blue-500 text-lg text-center animate-pulse">
-          Loading...
+        <div className="flex justify-center items-center">
+          <CircularProgress />
         </div>
       ) : error ? (
         <div className="text-red-500 text-lg text-center">{error}</div>

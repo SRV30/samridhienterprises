@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import MetaData from "../extra/MetaData";
 
 const UpdatePassword = () => {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ const UpdatePassword = () => {
         bgcolor: "background.paper",
       }}
     >
+      <MetaData title="Update Password" />
       <Typography variant="h5" gutterBottom>
         Update Password
       </Typography>

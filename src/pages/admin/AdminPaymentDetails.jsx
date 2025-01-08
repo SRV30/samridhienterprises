@@ -7,6 +7,8 @@ import {
 } from "@/store/extra/paymentDetailsSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import MetaData from "../extra/MetaData";
 
 const PaymentDetailsAdmin = () => {
   const dispatch = useDispatch();
@@ -58,12 +60,22 @@ const PaymentDetailsAdmin = () => {
     navigate(0);
   };
 
-  if (loading) return <div className="text-center text-xl">Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
   if (error)
-    return <div className="text-center text-xl text-red-500">{error}</div>;
+    return (
+      <div className="text-center text-xl text-red-500">
+        {toast.error(error)}
+      </div>
+    );
 
   return (
     <div className="container mx-auto p-8 bg-gray-50 min-h-screen">
+      <MetaData title="Update Payment Details" />
       <div className="text-center mb-10">
         <h2 className="text-5xl font-extrabold text-blue-500 mb-4">
           Payment Details

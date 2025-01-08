@@ -4,6 +4,8 @@ import { fetchProducts, deleteProduct } from "@/store/products/productsSlice";
 import { FaArrowsUpDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
+import MetaData from "../extra/MetaData";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -40,11 +42,15 @@ const ProductList = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <div className="text-red-500">{toast.error(error)}</div>;
   }
 
   const handleDelete = (id) => {
@@ -54,6 +60,7 @@ const ProductList = () => {
 
   return (
     <div className="p-6 min-h-screen bg-gray-100">
+    <MetaData title="Product List" />
       <Link to="/admin/dashboard">
         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-6">
           Back to Dashboard

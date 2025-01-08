@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAboutUs } from "@/store/extra/aboutUsSlice";
+import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
 
 const AboutUsPage = () => {
   const dispatch = useDispatch();
@@ -10,9 +12,9 @@ const AboutUsPage = () => {
     dispatch(fetchAboutUs());
   }, [dispatch]);
 
-  if (loading) return <div className="text-center text-lg">Loading...</div>;
+  if (loading) return <div className="flex justify-center items-center"><CircularProgress /></div>;
   if (error)
-    return <div className="text-center text-lg text-red-500">{error}</div>;
+    return <div className="text-center text-lg text-red-500">{toast.error(error)}</div>;
 
   return (
     <div className="bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen flex flex-col items-center py-12">

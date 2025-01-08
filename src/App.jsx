@@ -33,6 +33,7 @@ import AdminUpdateUser from "./pages/admin/AdminUpdateUser";
 import AdminContact from "./pages/admin/AdminGetInTouch";
 import AboutUsAdmin from "./pages/admin/AdminAboutUs";
 import PaymentDetailsAdmin from "./pages/admin/AdminPaymentDetails";
+import NotFound from "./pages/extra/NotFound";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -225,6 +226,7 @@ function App() {
             />
           </>
         )}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>

@@ -5,6 +5,8 @@ import { updateProduct, clearErrors } from "@/store/products/productsSlice";
 import { getProductDetails } from "@/store/products/productDetailsSlice";
 import { categories, vehicles } from "@/pages/extra/Data";
 import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
+import MetaData from "../extra/MetaData";
 
 const UpdateProduct = () => {
   const [images, setImages] = useState([]);
@@ -84,17 +86,33 @@ const UpdateProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // If no new images are selected, keep the old images
     const updatedProductData = {
       ...productData,
-      images: images.length > 0 ? images : oldImages, // Use oldImages if no new images
+      images: images.length > 0 ? images : oldImages,
     };
 
     dispatch(updateProduct({ id, productData: updatedProductData }));
   };
 
+  if (loading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (!product) {
+    return <div>{toast.error("Product not found.")}</div>;
+  }
+
+  if (error) {
+    return <div>{toast.error(error)}</div>;
+  }
+
   return (
     <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-xl mt-5 mb-5">
+      <MetaData title="Update Product" />
       <Link to="/admin/dashboard">
         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-6">
           Back to Dashboard

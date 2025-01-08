@@ -61,7 +61,7 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto p-6">
-     <CheckoutSteps activeStep={0} />
+      <CheckoutSteps activeStep={0} />
       <MetaData title="Cart | Shipping Details" />
       <h2 className="text-3xl font-bold text-center mb-8">Your Cart</h2>
 

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAboutUs, updateAboutUs } from "@/store/extra/aboutUsSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import MetaData from "../extra/MetaData";
 
 const AboutUsAdmin = () => {
   const dispatch = useDispatch();
@@ -55,12 +57,22 @@ const AboutUsAdmin = () => {
     navigate(0);
   };
 
-  if (loading) return <div className="text-center text-lg">Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
   if (error)
-    return <div className="text-center text-lg text-red-500">{error}</div>;
+    return (
+      <div className="text-center text-lg text-red-500">
+        {toast.error(error)}
+      </div>
+    );
 
   return (
     <div className="container mx-auto p-8 bg-gray-50 min-h-screen">
+    <MetaData title="Admin Panel - About Us" />
       <div className="text-center mb-10">
         <h2 className="text-5xl font-extrabold text-blue-600 mb-4">
           Admin Panel - About Us
@@ -170,7 +182,7 @@ const AboutUsAdmin = () => {
               type="submit"
               className="w-full px-6 py-4 bg-blue-600 text-white text-xl font-semibold rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition duration-200"
             >
-              {loading ? "Updating..." : "Update About Us"}
+              {loading ? "Updating..." : "Update"}
             </button>
           </div>
         </form>

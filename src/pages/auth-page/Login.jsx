@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import gsap from "gsap";
+import MetaData from "../extra/MetaData";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -44,6 +45,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <MetaData title="Login" />
       <div className="bg-white p-8 rounded shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
         {error && <p className="text-red-500">{error}</p>}
@@ -56,6 +58,7 @@ const LoginPage = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 border rounded"
               required
+              placeholder="Enter email"
             />
           </div>
           <div>

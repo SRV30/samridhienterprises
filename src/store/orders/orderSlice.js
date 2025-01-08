@@ -1,7 +1,6 @@
 import axiosInstance from "@/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Async thunk to create an order
 export const createOrder = createAsyncThunk(
   "order/create",
   async (orderData, { rejectWithValue }) => {
@@ -18,7 +17,6 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-// Async thunk to fetch logged-in user's orders
 export const fetchMyOrders = createAsyncThunk(
   "order/fetchMyOrders",
   async (_, { rejectWithValue }) => {
@@ -33,10 +31,10 @@ export const fetchMyOrders = createAsyncThunk(
 
 const initialState = {
   loading: false,
-  orders: [], // Stores the user's orders
+  orders: [], 
   error: null,
-  success: false, // Indicates successful order creation
-  order: null, // Stores details of a newly created order
+  success: false,
+  order: null, 
 };
 
 const orderSlice = createSlice({
@@ -52,7 +50,6 @@ const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Create Order
       .addCase(createOrder.pending, (state) => {
         state.loading = true;
       })
@@ -66,7 +63,6 @@ const orderSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Fetch My Orders
       .addCase(fetchMyOrders.pending, (state) => {
         state.loading = true;
         state.error = null;

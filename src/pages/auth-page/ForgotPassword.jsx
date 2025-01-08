@@ -1,6 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { toast } from "react-toastify";
 import { forgotPassword, clearError } from "@/store/auth/forgotPassword";
 import { gsap } from "gsap";

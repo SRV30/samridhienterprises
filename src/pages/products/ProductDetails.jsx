@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { getProductDetails } from "@/store/products/productDetailsSlice";
 import { toast } from "react-toastify";
 import { addItemsToCart } from "@/store/extra/cartSlice";
+import { CircularProgress } from "@mui/material";
+import MetaData from "../extra/MetaData";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -19,8 +21,14 @@ const ProductDetails = () => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
 
-  if (loading) return <div className="text-center">Loading...</div>;
-  if (error) return <div className="text-center text-red-500">{error}</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
+  if (error)
+    return <div className="text-center text-red-500">{toast.error(error)}</div>;
 
   const productImages = product?.images || [];
 
@@ -85,17 +93,15 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details">
+      <MetaData title={product.name} />
       <div className="container mx-auto p-6 md:p-12">
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Product Images Section */}
           <div className="md:w-1/2 relative">
-            {/* Main Image */}
             <img
               src={productImages[currentSlide]?.url}
               alt={product.name}
               className="w-full h-auto rounded-lg shadow-lg object-cover"
             />
-            {/* Navigation Dots */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
               {productImages.map((_, index) => (
                 <button
@@ -107,7 +113,6 @@ const ProductDetails = () => {
                 />
               ))}
             </div>
-            {/* Image Navigation */}
             {productImages.length > 1 && (
               <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex space-x-4">
                 <button
@@ -126,7 +131,6 @@ const ProductDetails = () => {
             )}
           </div>
 
-          {/* Product Info Section */}
           <div className="md:w-1/2">
             <h2 className="text-4xl font-bold text-blue-800 hover:text-blue-600 transition duration-300">
               {product.name}
@@ -188,13 +192,12 @@ const ProductDetails = () => {
               </button>
             </div>
 
-            {/* Add to Cart Button */}
             <button
               className="mt-8 w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300"
               disabled={product.Stock < 1}
               onClick={() => addToCartHandler(id, quantity)}
             >
-              Add to Cart
+              {loading ? "Adding..." : "Add to Cart"}
             </button>
           </div>
         </div>

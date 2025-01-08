@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import MetaData from "../extra/MetaData";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
     <div className="mx-auto px-6 py-2 mb-7">
+      <MetaData title="Admin Dashboard" />
       <h2 className="text-5xl font-extrabold text-center mb-1 text-blue-500 tracking-wide">
         Admin Dashboard
       </h2>

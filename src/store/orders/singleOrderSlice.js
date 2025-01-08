@@ -1,7 +1,6 @@
 import axiosInstance from "@/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Thunk for fetching a single order
 export const fetchSingleOrder = createAsyncThunk(
   "singleOrder/fetchSingleOrder",
   async (orderId, { rejectWithValue }) => {
@@ -20,7 +19,7 @@ const singleOrderSlice = createSlice({
   name: "singleOrder",
   initialState: {
     loading: false,
-    order: null, // changed to null
+    order: null, 
     error: null,
   },
   reducers: {

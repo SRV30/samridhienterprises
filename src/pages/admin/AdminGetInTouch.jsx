@@ -2,6 +2,8 @@ import { getContactForms } from "@/store/extra/contactSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../extra/MetaData";
+import { CircularProgress } from "@mui/material";
+import { toast } from "react-toastify";
 
 const AdminContact = () => {
   const dispatch = useDispatch();
@@ -23,8 +25,14 @@ const AdminContact = () => {
       <h2 className="font-extrabold text-3xl mb-6 text-center text-blue-600">
         Contact Form Submissions
       </h2>
-      {loading && <p className="text-center text-red-500">Loading...</p>}
-      {error && <p className="text-center text-red-300">{error}</p>}
+      {loading && (
+        <div className="flex justify-center items-center">
+          <CircularProgress />
+        </div>
+      )}
+      {error && (
+        <div className="text-center text-red-300">{toast.error(error)}</div>
+      )}
       {limitedContacts.length > 0 ? (
         <div className="mt-6">
           <h3 className="font-bold text-2xl mb-4 text-blue-400 text-center">

@@ -5,12 +5,13 @@ import { deleteUser } from "@/store/auth/profile";
 import { clearError, getAllUser } from "@/store/auth/allUsers";
 import { toast } from "react-toastify";
 import MetaData from "../extra/MetaData";
+import { CircularProgress } from "@mui/material";
 
 const AdminUsersList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { error, users } = useSelector((state) => state.getUsers);
+  const { error, users, loading } = useSelector((state) => state.getUsers);
   const {
     error: deleteError,
     isDeleted,
@@ -40,17 +41,24 @@ const AdminUsersList = () => {
     }
   }, [dispatch, error, deleteError, isDeleted, message, navigate]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <Fragment>
       <MetaData title={`ALL USERS - Admin`} />
-      
 
       <div className="container mx-auto px-6 py-12">
-      <Link to="/admin/dashboard">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-6">
-          Back to Dashboard
-        </button>
-      </Link>
+        <Link to="/admin/dashboard">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mb-6">
+            Back to Dashboard
+          </button>
+        </Link>
         <h2 className="text-4xl font-extrabold text-center text-blue-600 mb-8 mt-7">
           All Users
         </h2>

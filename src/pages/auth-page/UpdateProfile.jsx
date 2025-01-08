@@ -4,6 +4,8 @@ import { updateProfile, clearError, clearSuccess } from "@/store/auth/profile";
 import { toast } from "react-toastify";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import MetaData from "../extra/MetaData";
 
 const UpdateProfile = () => {
   const dispatch = useDispatch();
@@ -46,8 +48,17 @@ const UpdateProfile = () => {
     });
   }, [dispatch, error, success, navigate]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-6 updateProfile">
+      <MetaData title="Update Profile" />
       <h2 className="text-3xl font-bold text-center mb-6">Update Profile</h2>
       <form
         onSubmit={handleSubmit}

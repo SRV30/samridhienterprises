@@ -3,25 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleOrder } from "@/store/orders/singleOrderSlice";
 import { useParams } from "react-router-dom";
 import { Typography, Button, CircularProgress } from "@mui/material";
+import MetaData from "../extra/MetaData";
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
   const { orderId } = useParams();
   const { loading, error, order } = useSelector((state) => state.singleOrder);
- 
 
-  // Fetch order on component mount
   useEffect(() => {
     dispatch(fetchSingleOrder(orderId));
   }, [dispatch, orderId]);
 
-  // Function to print the page
   const handlePrint = () => {
-    window.print(); // Trigger the browser print dialog
+    window.print();
   };
 
   return (
     <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <MetaData title="Order Details" />
       {loading ? (
         <div className="flex justify-center items-center">
           <CircularProgress />
@@ -99,9 +98,7 @@ const OrderDetails = () => {
                     : "text-red-500"
                 } font-semibold`}
               >
-                {order.paymentInfo?.status === "Succeed"
-                  ? "PAID"
-                  : "NOT PAID"}
+                {order.paymentInfo?.status === "Succeed" ? "PAID" : "NOT PAID"}
               </p>
             </Typography>
             <div className="space-y-4 mt-2">
@@ -152,12 +149,10 @@ const OrderDetails = () => {
             </ul>
           </div>
 
-          {/* Total Price */}
           <Typography variant="h6" className="text-gray-800 font-semibold mb-6">
             Total Price: ₹{order.totalPrice}
           </Typography>
 
-          {/* Print Button */}
           <div className="mt-6 text-center print-btn">
             <Button
               variant="contained"

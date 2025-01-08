@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import gsap from "gsap";
+import MetaData from "../extra/MetaData";
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,16 +24,12 @@ const SignupPage = () => {
   );
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await dispatch(signupUser(formData));
-    if (signupUser.fulfilled.match(result)) {
-      navigate("/profile");
-    }
+    await dispatch(signupUser(formData));
   };
 
   const clearErrorMessage = () => {
@@ -65,6 +62,7 @@ const SignupPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <MetaData title="Sign Up" />
       <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
         <h1 className="text-2xl font-semibold text-center mb-6">Sign Up</h1>
         {error && (
@@ -119,7 +117,7 @@ const SignupPage = () => {
                 placeholder="Enter password"
                 name="password"
                 value={formData.password}
-                onChange={(e) => setShowPassword(e.target.value)}
+                onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border rounded"
               />
@@ -140,7 +138,7 @@ const SignupPage = () => {
                 id="confirm-password"
                 placeholder="Enter confirm password"
                 name="confirm-password"
-                onChange={(e) => showConfirmPassword(e.target.value)}
+                onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border rounded"
               />
