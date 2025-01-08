@@ -66,7 +66,6 @@ const ConfirmOrder = () => {
       totalPrice,
       paymentInfo: {
         method: paymentMethod,
-        id: "unique-payment-id",
         Image: paymentMethod === "UPI" ? "screenshot-url" : undefined,
       },
     };
