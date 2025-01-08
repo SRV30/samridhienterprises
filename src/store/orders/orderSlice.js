@@ -10,8 +10,10 @@ export const createOrder = createAsyncThunk(
           "Content-Type": "application/json",
         },
       });
+        console.log("Create Order Response:", data);
       return data;
     } catch (error) {
+      console.error("Create Order Error:", error.response?.data);
       return rejectWithValue(error.response.data.message || "Something went wrong");
     }
   }
