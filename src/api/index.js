@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api/se",
+  baseURL: "https://samridhienterprises-server-xyhd.onrender.com/api/se",
   withCredentials: true,
 });
 
