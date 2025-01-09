@@ -10,6 +10,7 @@ export const loginUser = createAsyncThunk(
 
       localStorage.setItem("authToken", token);
       localStorage.setItem("user", JSON.stringify(user));
+      console.log("Retrieved User:", user); 
       return { token, user };
     } catch (error) {
       return rejectWithValue(
