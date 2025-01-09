@@ -5,17 +5,12 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("authToken"); // Get the token from localStorage
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Add Bearer token to headers
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`; 
   }
-);
+  return config;
+});
 
 export default axiosInstance;
